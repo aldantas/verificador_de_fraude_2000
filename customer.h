@@ -18,7 +18,7 @@
 
 typedef struct customer{
     std::string code;
-    unsigned int *months;
+    int *months;
     bool isFraudulent;
 } Customer;
 

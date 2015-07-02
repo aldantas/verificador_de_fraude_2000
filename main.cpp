@@ -27,11 +27,10 @@
 #include <thread>
 #include "csvwriter.h"
 
-#define THREAD_COUNT 5
+#define THREAD_COUNT 10
 #define READ_LINE_INTERVAL 1000
 
 std::list<Customer> *thread_lists[THREAD_COUNT];
-Checker *checker = new Checker();
 
 void proccess(std::list<Customer>*, int);
 
@@ -40,6 +39,7 @@ int main(int argc, char *argv[])
 	CSVReader reader(argv[1]);
 	CSVWriter writer(argv[2]);
 	std::thread threads[THREAD_COUNT];
+    std::cout << "Aguarde..." << std::endl;
 
 	while(!reader.atEnd()) {
 		for(int i = 0; i < THREAD_COUNT; i++) {
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 		}
 
 		for(int i = 0; i < THREAD_COUNT; i++) {
-			writer.writeBuffer(thread_lists[i]);
+			writer.writeBuffer(thread_lists[0]);
 		}
 
 	}
@@ -60,9 +60,9 @@ int main(int argc, char *argv[])
 
 void proccess(std::list<Customer> *customer_list, int thread_index)
 {
+    Checker *checker = new Checker();
 	for(std::list<Customer>::iterator it=customer_list->begin(); it != customer_list->end(); ++it) {
 		checker->check(*it);
-		/* teste(*it); */
 	}
 
 	thread_lists[thread_index] = customer_list;

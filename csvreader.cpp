@@ -1,4 +1,5 @@
 #include "csvreader.h"
+#include <iostream>
 
 CSVReader::CSVReader(std::string file_name)
 {
@@ -21,6 +22,8 @@ CSVReader::CSVReader(std::string file_name)
 
             delete tokens;
         }
+    } else {
+        std::cout << "Arquivo não encontrado!" << std::endl;
     }
 }
 

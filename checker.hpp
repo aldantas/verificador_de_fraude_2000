@@ -9,13 +9,13 @@ class Checker {
     Customer *customer;
     unsigned int max_consumption;
     unsigned int min_consumption;
-	unsigned int *consumption_classification_months;
-    unsigned int *risc_months;
-	unsigned int *oscillation_months;
+	unsigned int consumption_classification_months[12];
+    unsigned int risc_months[12];
+	unsigned int oscillation_months[12];
 
   public:
     Checker();
-    void inline check(Customer &customer);
+    void check(Customer &customer);
     void inline check_consumption_classification();
     void inline check_risc();
     void inline check_oscillation();
