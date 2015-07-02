@@ -20,6 +20,9 @@ class Checker {
     Customer customer;
     unsigned int consumer_max;
     unsigned int consumer_min;
+	unsigned int *consumer_classification_months;
+ 	unsigned int *risc_months;	
+	unsigned int *oscillation_months;
 
   public:
     Checker(Customer customer);
@@ -28,6 +31,7 @@ class Checker {
     void inline check_risc();
     void inline check_oscillation();
     void inline check_anomaly();
+	void inline check_fraudulent();
     void inline check_consumer_max();
     void inline check_consumer_min();
 };
