@@ -1,3 +1,4 @@
+*.pri
 *.csv
 *.pro
 *.pro.user

@@ -10,10 +10,17 @@ void CSVWriter::writeBuffer(std::list<Customer> *customers)
     mutex.lock();
 
     if(file->is_open()){
-        for(std::list<Customer>::const_iterator i = customers->begin(); i != customers->end(); i++){
-            std::string isFraudulent = i->t.isFraudulent ? "SIM" : "NAO";
+        file << "U_CODIGO, jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez, resultado\n";
 
-            *file << i->code + ',' + isFraudulent + '\n';
+        for(std::list<Customer>::const_iterator i = customers->begin(); i != customers->end(); i++){
+            std::string isFraudulent = i->isFraudulent ? "SIM" : "NAO";
+            std::string months;
+
+            for(short x = 0; x < 12; x++){
+                months += i->months[x] == TEM_ANOMALIA  ? "SIM," : "NAO,";
+            }
+
+            *file << i->code + ',' + months + isFraudulent + '\n';
         }
     }
 
