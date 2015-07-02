@@ -1,5 +1,4 @@
 #include "checker.hpp"
-/* #include "customer.h" */
 #include<iostream>
 
 
@@ -10,16 +9,18 @@ Checker::Checker( Customer customer ) {
 
 void Checker::check_consumer_max() {
     for ( int i = 0; i < 12; i++ ) {
-        if ( this->customer.months[i] > consumer_max ) {
-            consumer_max= this->customer.months[i];
+        if ( this->customer.t.months[i] > consumer_max ) {
+            consumer_max= this->customer.t.months[i];
         }
     }
 }
 
 void Checker::check_consumer_min() {
+    consumer_min = 0;
+
     for ( int i = 0; i < 12; i++ ) {
-        if ( this->customer.months[i] < consumer_min ) {
-            consumer_m= this->customer.months[i];
+        if ( this->customer.t.months[i] < consumer_min ) {
+            consumer_min = this->customer.t.months[i];
         }
     }
 }
@@ -30,15 +31,15 @@ void Checker::check() {
 
 void Checker::check_consumer_classification() {
     for ( int i = 0; i < 12; i++ ) {
-        if ( this->customer.months[i] != null ) {
-            if ((this->consumer_min <= this->customer.months[i])
-                && (this->customer.months[i] <= ((this->consumer_max - this->consumer_min)/3) ) {
+        if ( this->customer.t.months[i] != NULL ) {
+            if ((this->consumer_min <= this->customer.t.months[i])
+                && (this->customer.t.months[i] <= ((this->consumer_max - this->consumer_min)/3))){
 
-            } else if ((((this->consumer_max - this->consumer_min)/3) < this->customer.months[i] )
-                && ( this->customer.months[i] <= (2 * ((this->consumer_max - this->consumer_min)/3)))) {
+            } else if ((((this->consumer_max - this->consumer_min)/3) < this->customer.t.months[i] )
+                && ( this->customer.t.months[i] <= (2 * ((this->consumer_max - this->consumer_min)/3)))) {
 
-            } else if ((( 2 * ((this->consumer_max - this->consumer_min)/3) ) < this->customer.months[i] )
-                && (this->customer.months[i] <= this->consumer_max ) ) {
+            } else if ((( 2 * ((this->consumer_max - this->consumer_min)/3) ) < this->customer.t.months[i] )
+                && (this->customer.t.months[i] <= this->consumer_max ) ) {
 
             }
         } else {
@@ -50,10 +51,10 @@ void Checker::check_consumer_classification() {
 void Checker::check_risc() {
     float risk_index= 0;
     for ( int i = 0; i < 12; i++ ) {
-        if ( this->customer.months[i] != null ) {
+        if ( this->customer.t.months[i] != NULL) {
             if ( i > 3 ) {
-                int aux = ((this->customer.months[i-3] + this->customer.months[i-2] + this->customer.months[i-1]) / 3);
-                risk_index= ((this->customer.months[i] - aux) / aux) * 1;
+                int aux = ((this->customer.t.months[i-3] + this->customer.t.months[i-2] + this->customer.t.months[i-1]) / 3);
+                risk_index= ((this->customer.t.months[i] - aux) / aux) * 1;
             } else {
                 risk_index = 0;
             }
@@ -75,9 +76,9 @@ void Checker::check_risc() {
 void Checker::check_oscillation() {
     float oscillation_index= 0;
     for ( int i = 0; i < 12; i++ ) {
-        if ( this->customer.months[i] != null ) {
+        if ( this->customer.t.months[i] != NULL ) {
             if ( i > 1 ) {
-                oscillation_index= ((this->customer.months[i] - this->customer.months[i-1]) / this->customer.months[i-1]) * 1;
+                oscillation_index= ((this->customer.t.months[i] - this->customer.t.months[i-1]) / this->customer.t.months[i-1]) * 1;
             } else {
                 oscillation_index = 0;
             }

@@ -3,7 +3,7 @@
  *
  * Augusto Lopez Dantas - augustold42@gmail.com
  * Cristiano Antonio de Souza -
- * Gabriel Custódio Martins -
+ * Gabriel Custódio Martins - gcmartins93@gmail.com
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,8 @@
 
 #include <iostream>
 #include <thread>
+#include "csvreader.h"
+#include "csvwriter.h"
 
 using namespace std;
 
@@ -30,7 +32,7 @@ void teste(int i) {
 }
 
 int main(void) {
-    thread threads[5];
+    /*thread threads[5];
 
     for(int i = 0; i < 5; i++) {
         threads[i] = thread(teste, i);
@@ -40,7 +42,27 @@ int main(void) {
         threads[i].join();
     }
 
-    cout << endl;
+    cout << endl;*/
+
+    CSVReader *reader = new CSVReader("test.csv");
+    std::list<Customer> *customers = reader->readLines();
+
+    for(std::list<Customer>::iterator i = customers->begin(); i != customers->end(); i++){
+        std::cout << i->code << std::endl;
+    }
+
+    delete customers;
+
+    /*Customer c;
+    c.code = "0000111";
+    c.t.isFraudulent = false;
+
+    std::list<Customer> *l = new std::list<Customer>();
+    l->push_back(c);
+
+    CSVWriter *writer = new CSVWriter();
+    writer->writeBuffer(l);
+    delete writer;*/
 
     return 0;
 }

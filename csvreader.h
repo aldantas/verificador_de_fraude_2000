@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <vector>
 #include <sstream>
-#include <iostream>
 #include "customer.h"
 
 class CSVReader
@@ -20,8 +19,12 @@ class CSVReader
 
 public:
     CSVReader(std::string file_name);
-    std::list<Customer> readLines(unsigned short quantity = 100);
+    std::list<Customer>* readLines(unsigned short quantity = 100);
+    bool atEnd();
     ~CSVReader();
+
+private:
+    std::list<std::string>* retrieveTokens(std::string line, char delimiter = ',');
 };
 
 #endif // CSVREADER_H

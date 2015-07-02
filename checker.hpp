@@ -1,6 +1,8 @@
 #ifndef CHECKER_HPP
 #define CHECKER_HPP
 
+#include "customer.h"
+
 #define CONSUMO_BAIXO 1
 #define CONSUMO_MEDIO 2
 #define CONSUMO_ALTO 3
@@ -12,12 +14,6 @@
 #define OSCILACAO_NORMAL 11
 #define OSCILACAO_ASCENDENTE 12
 
-// vai sair daqui depois
-typedef struct customer{
-    std::string code;
-    unsigned int *months;
-} Customer;
-
 //Classe com os atributos Customer, os respectivos consumo maximo e minimo, e os métodos que realizam as verificações
 class Checker {
     Customer customer;
@@ -25,7 +21,7 @@ class Checker {
     unsigned int consumer_min;
 
   public:
-    Checker();
+    Checker(Customer customer);
     void inline check();
     void inline check_consumer_classification();
     void inline check_risc();
@@ -33,6 +29,6 @@ class Checker {
     void inline check_anomaly();
     void inline check_consumer_max();
     void inline check_consumer_min();
-}
+};
 
 #endif
