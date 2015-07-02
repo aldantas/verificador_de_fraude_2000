@@ -1,6 +1,8 @@
 #ifndef CHECKER_HPP
 #define CHECKER_HPP
 
+#include <string>
+
 #define CONSUMO_BAIXO 1
 #define CONSUMO_MEDIO 2
 #define CONSUMO_ALTO 3
@@ -33,6 +35,6 @@ class Checker {
     void inline check_anomaly();
     void inline check_consumer_max();
     void inline check_consumer_min();
-}
+};
 
 #endif

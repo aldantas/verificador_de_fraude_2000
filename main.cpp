@@ -20,6 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  * ************************************************************************* */
 
+#include "checker.hpp"
 #include <iostream>
 #include <thread>
 
