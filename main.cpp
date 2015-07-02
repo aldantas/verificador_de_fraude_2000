@@ -2,7 +2,7 @@
  * Copyright (C) 2015
  *
  * Augusto Lopez Dantas - augustold42@gmail.com
- * Cristiano Antonio de Souza -
+ * Cristiano Antonio de Souza - cristianoantonio.souza10@gmail.com
  * Gabriel Custódio Martins - gcmartins93@gmail.com
  *
  * This program is free software; you can redistribute it and/or modify
@@ -31,6 +31,7 @@
 #define READ_LINE_INTERVAL 1000
 
 std::list<Customer> *thread_lists[THREAD_COUNT];
+Checker checker = new Checker();
 
 void proccess(std::list<Customer>*, int);
 
@@ -65,8 +66,8 @@ void teste(Customer &customer)
 void proccess(std::list<Customer> *customer_list, int thread_index)
 {
 	for(std::list<Customer>::iterator it=customer_list->begin(); it != customer_list->end(); ++it) {
-		/* check(*it); */
-		teste(*it);
+		checker.check(*it);
+		/* teste(*it); */
 	}
 
 	thread_lists[thread_index] = customer_list;
