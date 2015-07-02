@@ -3,7 +3,7 @@
  *
  * Augusto Lopez Dantas - augustold42@gmail.com
  * Cristiano Antonio de Souza -
- * Gabriel Custódio Martins -
+ * Gabriel Custódio Martins - gcmartins93@gmail.com
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,46 +25,49 @@
 #include "customer.h"
 #include <iostream>
 #include <thread>
+#include "csvwriter.h"
 
 #define THREAD_COUNT 5
 #define READ_LINE_INTERVAL 1000
 
-std::list<Customer> thread_lists[THREAD_COUNT];
+std::list<Customer> *thread_lists[THREAD_COUNT];
 
-void proccess(std::list<Customer>, int);
+void proccess(std::list<Customer>*, int);
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 	CSVReader reader(argv[1]);
-    std::thread threads[THREAD_COUNT];
+	CSVWriter writer(argv[2]);
+	std::thread threads[THREAD_COUNT];
 
-    for(int i = 0; i < THREAD_COUNT; i++) {
-        threads[i] = std::thread(proccess, reader.readLines(READ_LINE_INTERVAL), i);
-    }
+	while(!reader.atEnd()) {
+		for(int i = 0; i < THREAD_COUNT; i++) {
+			threads[i] = std::thread(proccess, reader.readLines(READ_LINE_INTERVAL), i);
+		}
 
-    for(int i = 0; i < THREAD_COUNT; i++) {
-        threads[i].join();
-    }
+		for(int i = 0; i < THREAD_COUNT; i++) {
+			threads[i].join();
+		}
 
-    for(int i = 0; i < THREAD_COUNT; i++) {
-		std::cout << thread_lists[i].begin()->t.isFraudulent << ' ' << i << std::endl;
-    }
+		for(int i = 0; i < THREAD_COUNT; i++) {
+			writer.writeBuffer(thread_lists[i]);
+		}
 
-
-    return 0;
+	}
+	return 0;
 }
 
-void teste(Customer &customer) {
+void teste(Customer &customer)
+{
 	customer.t.isFraudulent = false;
 }
 
-void proccess(std::list<Customer> customer_list, int thread_index) {
-	/* for(std::list<Customer>::iterator it=customer_list.begin(); it != customer_list.end(); ++it) { */
-	/* 	std::cout << it->code << std::endl; */
-	/* } */
+void proccess(std::list<Customer> *customer_list, int thread_index)
+{
+	for(std::list<Customer>::iterator it=customer_list->begin(); it != customer_list->end(); ++it) {
+		/* check(*it); */
+		teste(*it);
+	}
 
-	std::cout << customer_list.begin()->code << ' ' << thread_index << std::endl;
-	teste(*(customer_list.begin()));
 	thread_lists[thread_index] = customer_list;
 }
-
-

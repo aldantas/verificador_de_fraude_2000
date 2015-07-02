@@ -22,7 +22,7 @@ class Checker {
     unsigned int consumer_min;
 
   public:
-    Checker();
+    Checker(Customer customer);
     void inline check();
     void inline check_consumer_classification();
     void inline check_risc();

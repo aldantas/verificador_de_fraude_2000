@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-std=c++11 -I. -c
 LDFLAGS=-lpthread
-SRC=main.cpp csvreader.cpp
+SRC=main.cpp csvreader.cpp csvwriter.cpp
 OBJ=$(SRC:.cpp=.o)
 TARGET=main
 
