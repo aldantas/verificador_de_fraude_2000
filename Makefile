@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-std=c++11 -I. -c
 LDFLAGS=-lpthread
-SRC=main.cpp checker.cpp
+SRC=main.cpp csvreader.cpp
 OBJ=$(SRC:.cpp=.o)
 TARGET=main
 

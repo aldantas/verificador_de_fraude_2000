@@ -21,27 +21,50 @@
  * ************************************************************************* */
 
 #include "checker.hpp"
+#include "csvreader.h"
+#include "customer.h"
 #include <iostream>
 #include <thread>
 
-using namespace std;
+#define THREAD_COUNT 5
+#define READ_LINE_INTERVAL 1000
 
-void teste(int i) {
-    cout << i;
-}
+std::list<Customer> thread_lists[THREAD_COUNT];
 
-int main(void) {
-    thread threads[5];
+void proccess(std::list<Customer>, int);
 
-    for(int i = 0; i < 5; i++) {
-        threads[i] = thread(teste, i);
+int main(int argc, char *argv[]) {
+	CSVReader reader(argv[1]);
+    std::thread threads[THREAD_COUNT];
+
+    for(int i = 0; i < THREAD_COUNT; i++) {
+        threads[i] = std::thread(proccess, reader.readLines(READ_LINE_INTERVAL), i);
     }
 
-    for(int i = 0; i < 5; i++) {
+    for(int i = 0; i < THREAD_COUNT; i++) {
         threads[i].join();
     }
 
-    cout << endl;
+    for(int i = 0; i < THREAD_COUNT; i++) {
+		std::cout << thread_lists[i].begin()->t.isFraudulent << ' ' << i << std::endl;
+    }
+
 
     return 0;
 }
+
+void teste(Customer &customer) {
+	customer.t.isFraudulent = false;
+}
+
+void proccess(std::list<Customer> customer_list, int thread_index) {
+	/* for(std::list<Customer>::iterator it=customer_list.begin(); it != customer_list.end(); ++it) { */
+	/* 	std::cout << it->code << std::endl; */
+	/* } */
+
+	std::cout << customer_list.begin()->code << ' ' << thread_index << std::endl;
+	teste(*(customer_list.begin()));
+	thread_lists[thread_index] = customer_list;
+}
+
+

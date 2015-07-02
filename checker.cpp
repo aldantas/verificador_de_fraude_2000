@@ -1,5 +1,4 @@
 #include "checker.hpp"
-/* #include "customer.h" */
 #include<iostream>
 
 
