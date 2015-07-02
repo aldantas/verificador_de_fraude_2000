@@ -11,7 +11,7 @@ void CSVWriter::writeBuffer(std::list<Customer> *customers)
 
     if(file->is_open()){
         for(std::list<Customer>::const_iterator i = customers->begin(); i != customers->end(); i++){
-            std::string isFraudulent = i->t.isFraudulent ? "SIM" : "NAO";
+            std::string isFraudulent = i->isFraudulent ? "SIM" : "NAO";
 
             *file << i->code + ',' + isFraudulent + '\n';
         }

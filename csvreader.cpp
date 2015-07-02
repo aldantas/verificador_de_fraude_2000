@@ -33,7 +33,7 @@ std::list<Customer>* CSVReader::readLines(unsigned short quantity)
     if(this->file->is_open()){
         while(retrieved < quantity && std::getline(*file, line)){
             Customer customer;
-            customer.t.months = new unsigned int[12];
+            customer.months = new unsigned int[12];
 
             std::list<std::string> *tokens = this->retrieveTokens(line);
             unsigned short count = 0, i = 0;
@@ -42,7 +42,7 @@ std::list<Customer>* CSVReader::readLines(unsigned short quantity)
                 //verifica se e uma coluna a ser lida
                 if(std::find(columns_index.begin(), columns_index.end(), count) != columns_index.end()){
                     if(count != columns_index[0]){
-                        customer.t.months[i++] = std::stoi(*token);
+                        customer.months[i++] = std::stoi(*token);
                     } else {
                         customer.code = *token;
                     }
