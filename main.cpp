@@ -31,7 +31,7 @@
 #define READ_LINE_INTERVAL 1000
 
 std::list<Customer> *thread_lists[THREAD_COUNT];
-Checker checker = new Checker();
+Checker *checker = new Checker();
 
 void proccess(std::list<Customer>*, int);
 
@@ -58,15 +58,10 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void teste(Customer &customer)
-{
-	customer.t.isFraudulent = false;
-}
-
 void proccess(std::list<Customer> *customer_list, int thread_index)
 {
 	for(std::list<Customer>::iterator it=customer_list->begin(); it != customer_list->end(); ++it) {
-		checker.check(*it);
+		checker->check(*it);
 		/* teste(*it); */
 	}
 
