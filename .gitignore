@@ -1,2 +1,4 @@
 *.csv
+*.pro
+*.pro.user
 *.o
