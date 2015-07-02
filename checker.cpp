@@ -1,45 +1,14 @@
-#include<stdio.h>
+#include "checker.hpp"
+/* #include "customer.h" */
 #include<iostream>
-
-#define CONSUMO_BAIXO 1
-#define CONSUMO_MEDIO 2
-#define CONSUMO_ALTO 3
-#define ALTO_RISCO 5
-#define MEDIO_RISCO 6
-#define BAIXO_RISCO 7
-#define SEM_RISCO 8
-#define OSCILACAO_DESCENDENTE 10
-#define OSCILACAO_NORMAL 11
-#define OSCILACAO_ASCENDENTE 12
-
-typedef struct customer{
-    std::string code;
-    unsigned int *months;
-} Customer;
-
-//Classe com os atributos Customer, os respectivos consumo maximo e minimo, e os métodos que realizam as verificações
-class Checker {
-    Customer customer;
-    unsigned int consumer_max;
-    unsigned int consumer_min;
-  public:
-    Checker();
-    void inline check();
-    void inline check_consumer_classification();
-    void inline check_risc();
-    void inline check_oscillation();
-    void inline check_anomaly();
-    void inline check_consumer_max();
-    void inline check_consumer_min();
-}
 
 
 //Implementação do construtor da classe
-void Checker::Checker( Customer customer ) {
+Checker::Checker( Customer customer ) {
     this->customer = customer;
 }
 
-void Checker::checke_consumer_max() {
+void Checker::check_consumer_max() {
     for ( int i = 0; i < 12; i++ ) {
         if ( this->customer.months[i] > consumer_max ) {
             consumer_max= this->customer.months[i];
@@ -47,7 +16,7 @@ void Checker::checke_consumer_max() {
     }
 }
 
-void Checker::checke_consumer_min() {
+void Checker::check_consumer_min() {
     for ( int i = 0; i < 12; i++ ) {
         if ( this->customer.months[i] < consumer_min ) {
             consumer_m= this->customer.months[i];
@@ -55,11 +24,11 @@ void Checker::checke_consumer_min() {
     }
 }
 
-void Checker::checke() {
+void Checker::check() {
 
 }
 
-void Checker::checke_consumer_classification() {
+void Checker::check_consumer_classification() {
     for ( int i = 0; i < 12; i++ ) {
         if ( this->customer.months[i] != null ) {
             if ((this->consumer_min <= this->customer.months[i])
@@ -73,12 +42,12 @@ void Checker::checke_consumer_classification() {
 
             }
         } else {
-            println("Mes com valor de consumo null!");
+            std::cout << "Mes com valor de consumo null!" << std::endl;
         }
     }
 }
 
-void Checker::checke_risc() {
+void Checker::check_risc() {
     float risk_index= 0;
     for ( int i = 0; i < 12; i++ ) {
         if ( this->customer.months[i] != null ) {
@@ -98,12 +67,12 @@ void Checker::checke_risc() {
 
             }
         } else {
-            println("Mes com valor de consumo null!");
+            std::cout << "Mes com valor de consumo null!" << std::endl;
         }
     }
 }
 
-void Checker::checke_oscillation() {
+void Checker::check_oscillation() {
     float oscillation_index= 0;
     for ( int i = 0; i < 12; i++ ) {
         if ( this->customer.months[i] != null ) {
@@ -120,11 +89,11 @@ void Checker::checke_oscillation() {
 
             }
         } else {
-            println("Mes com valor de consumo null!");
+            std::cout << "Mes com valor de consumo null!" << std::endl;
         }
     }
 }
 
-void Checker::checke_anomaly() {
+void Checker::check_anomaly() {
 
 }
