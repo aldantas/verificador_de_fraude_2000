@@ -5,10 +5,8 @@
 
 typedef struct customer{
     std::string code;
-    union type{
-        unsigned int *months;
-        bool isFraudulent;
-    } t;
+    unsigned int *months;
+    bool isFraudulent;
 } Customer;
 
 #endif // CUSTOMER
