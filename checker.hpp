@@ -2,6 +2,7 @@
 #define CHECKER_HPP
 
 #include "customer.h"
+#include <string>
 
 #define CONSUMO_BAIXO 1
 #define CONSUMO_MEDIO 2

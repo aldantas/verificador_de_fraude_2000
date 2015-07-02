@@ -1,7 +1,6 @@
 #include "checker.hpp"
 #include<iostream>
 
-
 //Implementação do construtor da classe
 Checker::Checker( Customer customer ) {
     this->customer = customer;
