@@ -37,6 +37,7 @@ std::list<Customer>* CSVReader::readLines(unsigned short quantity)
         while(retrieved < quantity && std::getline(*file, line)){
             Customer customer;
             customer.months = new int[12];
+			customer.months_result = new int[12];
 
             std::list<std::string> *tokens = this->retrieveTokens(line);
             unsigned short count = 0, i = 0;

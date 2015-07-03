@@ -8,11 +8,13 @@
 
 class CSVWriter
 {
-    std::ofstream *file;
+    std::ofstream *file1;
+    std::ofstream *file2;
     std::mutex mutex;
 
 public:
-    CSVWriter(std::string file_name = "output.csv");
+    CSVWriter(std::string file1_name);
+    CSVWriter(std::string file1_name = "output1.csv", std::string file2_name = "output2.csv");
     void writeBuffer(std::list<Customer> *customers);
     ~CSVWriter();
 };

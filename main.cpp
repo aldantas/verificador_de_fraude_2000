@@ -27,7 +27,7 @@
 #include "customer.h"
 #include "csvwriter.h"
 
-#define THREAD_COUNT 5 // quantidade de execuções paralelas
+#define THREAD_COUNT 20 // quantidade de execuções paralelas
 #define READ_LINE_INTERVAL 1000 // quantidade de linhas lidas por thread
 
 /* array global com listas de clientes que serão concatenados
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     /* abra o arquivo de entrada */
 	CSVReader reader(argv[1]);
     /* inicialize o arquivo de saída */
-	CSVWriter writer(argv[2]);
+	CSVWriter writer("output1.csv", "output2.csv");
 
 	std::thread threads[THREAD_COUNT];
     std::cout << "Aguarde..." << std::endl;

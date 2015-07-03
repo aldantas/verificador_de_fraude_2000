@@ -93,9 +93,9 @@ void Checker::check_anomaly() {
     for ( int i = 0; i < 12; i++ ) {
         if ( ((this->risc_months[i] == ALTO_RISCO) || (this->risc_months[i] == MEDIO_RISCO)) &&
              (this->consumption_classification_months[i] == CONSUMO_BAIXO) && (this->oscillation_months[i] == OSCILACAO_DESCENDENTE) ) {
-            this->customer->months[i]= TEM_ANOMALIA;
+			this->customer->months_result[i] = TEM_ANOMALIA;
         } else {
-            this->customer->months[i]= NAO_TEM_ANOMALIA;
+            this->customer->months_result[i]= NAO_TEM_ANOMALIA;
         }
     }
 }
@@ -103,7 +103,7 @@ void Checker::check_anomaly() {
 void Checker::check_fraudulent() {
     this->customer->isFraudulent = false;
     for ( int i = 0; i < 12; i++ ) {
-        if (this->customer->months[i] == TEM_ANOMALIA){
+        if (this->customer->months_result[i] == TEM_ANOMALIA){
             this->customer->isFraudulent = true;
             break;
         }

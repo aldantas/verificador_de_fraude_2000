@@ -19,6 +19,7 @@
 typedef struct customer{
     std::string code;
     int *months;
+	int *months_result;
     bool isFraudulent;
 } Customer;
 
